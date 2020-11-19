@@ -25,9 +25,9 @@ const parsePhrases = (
       const wordIndex = text.indexOf(word, phraseIndex + wordOffset);
       wordOffset = word.length;
       const phrasesArray = [];
-      const idx = `${phraseIndex}-${endOffset}`;
+      const phraseIndexRange = `${phraseIndex}-${endOffset}`;
       const phraseObject: Record<string, any> = {};
-      phraseObject[idx] = string;
+      phraseObject[phraseIndexRange] = string;
       phrasesArray.push(phraseObject);
 
       if (!output.has(wordIndex)) {
