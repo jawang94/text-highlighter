@@ -3,7 +3,7 @@ class HighlightedTextObject {
 
   phraseArr: Record<string, string>[];
 
-  color: string;
+  highlightColor: string;
 
   textColor: string;
 
@@ -15,27 +15,27 @@ class HighlightedTextObject {
   constructor(
     content: string,
     phraseArr: Record<string, string>[],
-    phraseColor: string,
+    highlightColor: string,
     textColor: string,
     idx: number,
     priority: number,
   ) {
     this.content = content;
     this.phraseArr = phraseArr;
-    this.color = phraseColor;
+    this.highlightColor = highlightColor;
     this.textColor = textColor;
     this.idx = idx;
     this.priority = priority;
   }
 
-  updateColor(phraseColor: string, textColor: string): void {
-    this.color = phraseColor;
+  updateColor(highlightColor: string, textColor: string): void {
+    this.highlightColor = highlightColor;
     this.textColor = textColor;
   }
 
   // a method to udate an entry in the HighlightDictionary, only updates the color and adds on a class
-  update(phraseColor: string, phraseObj: Record<string, string>): void {
-    this.color = phraseColor;
+  update(highlightColor: string, phraseObj: Record<string, string>): void {
+    this.highlightColor = highlightColor;
     this.phraseArr.push(phraseObj);
   }
 }
