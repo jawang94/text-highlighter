@@ -7,7 +7,7 @@ const StyledSpan = styled.span`
 `;
 
 interface IProps {
-  state: { highlightColor: string; textColor: string; key: number };
+  state: { highlightColor: string; textColor: string; key: number | string };
 }
 
 export default function BasicWhitespaceBlock({

@@ -31,51 +31,46 @@ const createTextBlocks = ({
   // highlightedPhrasesArray comes in as the entirely sliced input text data
   const textBlockArray = highlightedPhrasesArray.slice();
 
-  console.log(
-    'initial highlightedPhrasesArr',
-    textBlockArray,
-    index,
-    endOffset,
-    remainingHighlights,
-  );
-
   for (let i = 0; i < textBlockArray.length; i += 1) {
     const currentWord = textBlockArray[i] === '' ? ' ' : textBlockArray[i];
     const incrementIdx = currentWord.length > 1 ? currentWord.length + 1 : currentWord.length;
     const nextIdx = idx + incrementIdx;
-    const deferWhitespace = deferWhitespaceCreation(endOffset, remainingHighlights);
-    console.log('defer white', deferWhitespace);
+    const deferWhitespace = deferWhitespaceCreation(startOffset, endOffset, remainingHighlights);
+
     // console.log('temparr of i', textBlockArray[i], endOffset);
-    console.log(currentWord, word, idx, index, currentWord.length, startOffset, endOffset);
 
     if (index === idx) {
       const el = (
-        <>
+        <span key={`${index}-${word}-span`}>
           <HighlightedTextBlock
-            key={index + word}
+            key={`${index}-${word}`}
             state={{ highlightColor, textColor, content: textBlockArray[i], key: index }}
           />
           {nextIdx < endOffset ? (
             <BasicWhitespaceBlock
-              key={index + word}
+              key={`${index}-${word}-'space'-${highlightColor}`}
               state={{ highlightColor, textColor, key: index }}
             />
           ) : deferWhitespace !== false ? (
             <BasicWhitespaceBlock
-              key={index + word}
+              key={`${index}-${word}-'space'-${deferWhitespace.value.highlightColor}`}
               state={{
                 highlightColor: deferWhitespace.value.highlightColor,
                 textColor: deferWhitespace.value.textColor,
-                key: deferWhitespace.key,
+                key: `${index}-${word}-'space'-${deferWhitespace.value.highlightColor}`,
               }}
             />
           ) : (
             <BasicWhitespaceBlock
-              key={index + word}
-              state={{ highlightColor: 'transparent', textColor: 'black', key: index }}
+              key={`${index}-${word}-'space-transparent'`}
+              state={{
+                highlightColor: 'transparent',
+                textColor: 'black',
+                key: `${index}-${word}-'space-transparent'`,
+              }}
             />
           )}
-        </>
+        </span>
       );
       textBlockArray[i] = { element: el, length: word.length };
       // console.log(tempArr[i]);

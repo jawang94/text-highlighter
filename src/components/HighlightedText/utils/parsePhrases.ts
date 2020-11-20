@@ -13,7 +13,6 @@ const parsePhrases = (
     let startIndex = startOffset;
 
     const phrase = text.slice(startOffset, endOffset + 1);
-    console.log('phrase', phrase);
     const wordsArray = phrase.split(' ');
     let wordOffset = 0;
     let phraseIndex = startOffset;

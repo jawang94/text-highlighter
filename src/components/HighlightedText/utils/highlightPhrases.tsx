@@ -11,7 +11,6 @@ const highlightPhrases = (
 ): any[] => {
   let highlightedPhrasesArray: any = text.split(' ');
   const highlightsMapToArray = Array.from(highlightsMap).map(([key, value]) => ({ key, value }));
-  console.log(highlightsMapToArray);
 
   for (let i = 0; i < highlightsMapToArray.length; i += 1) {
     const {
@@ -19,6 +18,8 @@ const highlightPhrases = (
       value: { content, highlightColor, textColor, endOffset, startOffset },
     } = highlightsMapToArray[i];
     const remainingHighlights = highlightsMapToArray.slice(i);
+    console.log('remainingHighlights', remainingHighlights);
+
     const textBlockProps = {
       index: key,
       word: content,
@@ -29,7 +30,7 @@ const highlightPhrases = (
       remainingHighlights,
       highlightedPhrasesArray,
     };
-    console.log('textBlockProps', textBlockProps);
+
     highlightedPhrasesArray = createTextBlocks(textBlockProps);
   }
 
