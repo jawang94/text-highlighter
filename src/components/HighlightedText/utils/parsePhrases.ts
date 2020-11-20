@@ -6,11 +6,14 @@ const parsePhrases = (
 ): Map<number, HighlightedTextObject> => {
   const highlightsMap = new Map();
 
+  console.log('orderedHighlights', orderedHighlights);
+
   orderedHighlights.forEach((highlight) => {
     const { startOffset, endOffset, color, priority } = highlight;
     let startIndex = startOffset;
 
     const phrase = text.slice(startOffset, endOffset + 1);
+    console.log('phrase', phrase);
     const wordsArray = phrase.split(' ');
     let wordOffset = 0;
     let phraseIndex = startOffset;
@@ -23,7 +26,7 @@ const parsePhrases = (
       const wordIndex = text.indexOf(word, phraseIndex + wordOffset);
       wordOffset = word.length;
       const phrasesArray = [];
-      const phraseIndexRange = `${phraseIndex}-${phraseIndex + word.length}`;
+      const phraseIndexRange = `${startOffset}-${endOffset}`;
       const phraseObject: Record<string, any> = {};
       phraseObject[phraseIndexRange] = phrase;
       phrasesArray.push(phraseObject);
@@ -31,16 +34,25 @@ const parsePhrases = (
       if (!highlightsMap.has(wordIndex)) {
         highlightsMap.set(
           wordIndex,
-          new HighlightedTextObject(word, phrasesArray, color, 'textBlack', wordIndex, priority),
+          new HighlightedTextObject(
+            word,
+            phrasesArray,
+            color,
+            'textBlack',
+            wordIndex,
+            priority,
+            startOffset,
+            endOffset,
+          ),
         );
       } else {
-        highlightsMap.get(wordIndex).update(color, phraseObject);
+        highlightsMap.get(wordIndex).update(color, phraseObject, startOffset, endOffset);
       }
       startIndex = phraseIndex + word.length;
       phraseIndex = text.indexOf(word, startIndex);
     });
   });
-
+  console.log('the phrases', highlightsMap);
   return highlightsMap;
 };
 

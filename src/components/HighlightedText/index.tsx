@@ -31,7 +31,7 @@ function HighlightedText({ text, highlights }: IProps): JSX.Element {
     const orderedHighlights = orderHighlights(highlights);
     const highlightsMap = parsePhrases(text, orderedHighlights);
     const highlightedPhrasesArray = highlightPhrases(text, highlightsMap);
-
+    console.log('result', highlightedPhrasesArray);
     updateState((currentState: IState) => {
       return {
         ...currentState,
@@ -46,7 +46,6 @@ function HighlightedText({ text, highlights }: IProps): JSX.Element {
   return (
     <div>
       <div>{state.result}</div>
-      <p>{text}</p>
     </div>
   );
 }

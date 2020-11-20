@@ -7,11 +7,11 @@ const StyledSpan = styled.span`
 `;
 
 interface IProps {
-  state: { highlightColor: string; textColor: string; content: string; key: number };
+  state: { highlightColor: string; textColor: string; key: number };
 }
 
-export default function HighlightedTextBlock({
-  state: { highlightColor, textColor, content, key },
+export default function BasicWhitespaceBlock({
+  state: { highlightColor, textColor, key },
 }: IProps): JSX.Element {
   return (
     <StyledSpan
@@ -22,7 +22,7 @@ export default function HighlightedTextBlock({
         textColor: `${textColor}`,
       }}
     >
-      {content}
+      {' '}
     </StyledSpan>
   );
 }
