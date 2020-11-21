@@ -1,3 +1,4 @@
+// This method sorts the highlights in descending priority. Later items have higher priority. Second wins scenario.
 const orderPhrases = (
   highlights: { startOffset: number; endOffset: number; color: string; priority: number }[],
 ): { startOffset: number; endOffset: number; color: string; priority: number }[] => {

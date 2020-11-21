@@ -1,13 +1,13 @@
 class HighlightedTextObject {
-  content: string;
+  word: string;
 
-  phraseArr: Record<string, string>[];
+  phrasesArray: Record<string, string>[];
 
   highlightColor: string;
 
   textColor: string;
 
-  idx: number;
+  wordIndex: number;
 
   priority: number;
 
@@ -15,22 +15,22 @@ class HighlightedTextObject {
 
   endOffset: number;
 
-  // class to create a highlight index for the HightlightDictionary in the HighlightControl
-  constructor(
-    content: string,
-    phraseArr: Record<string, string>[],
-    highlightColor: string,
-    textColor: string,
-    idx: number,
-    priority: number,
-    startOffset: number,
-    endOffset: number,
-  ) {
-    this.content = content;
-    this.phraseArr = phraseArr;
+  constructor(props: IProps) {
+    const {
+      word,
+      phrasesArray,
+      highlightColor,
+      textColor,
+      wordIndex,
+      priority,
+      startOffset,
+      endOffset,
+    } = props;
+    this.word = word;
+    this.phrasesArray = phrasesArray;
     this.highlightColor = highlightColor;
     this.textColor = textColor;
-    this.idx = idx;
+    this.wordIndex = wordIndex;
     this.priority = priority;
     this.startOffset = startOffset;
     this.endOffset = endOffset;
@@ -51,8 +51,19 @@ class HighlightedTextObject {
     this.highlightColor = highlightColor;
     this.startOffset = startOffset;
     this.endOffset = endOffset;
-    this.phraseArr.push(phraseObj);
+    this.phrasesArray.push(phraseObj);
   }
+}
+
+interface IProps {
+  word: string;
+  phrasesArray: Record<string, string>[];
+  highlightColor: string;
+  textColor: string;
+  wordIndex: number;
+  priority: number;
+  startOffset: number;
+  endOffset: number;
 }
 
 export default HighlightedTextObject;
