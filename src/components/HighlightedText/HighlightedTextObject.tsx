@@ -1,4 +1,15 @@
-class HighlightedTextObject {
+interface HighlightedTextObjectProps {
+  word: string;
+  phrasesArray: Record<string, string>[];
+  highlightColor: string;
+  textColor: string;
+  wordIndex: number;
+  priority: number;
+  startOffset: number;
+  endOffset: number;
+}
+
+export default class HighlightedTextObject {
   word: string;
 
   phrasesArray: Record<string, string>[];
@@ -15,7 +26,7 @@ class HighlightedTextObject {
 
   endOffset: number;
 
-  constructor(props: IProps) {
+  constructor(props: HighlightedTextObjectProps) {
     const {
       word,
       phrasesArray,
@@ -54,16 +65,3 @@ class HighlightedTextObject {
     this.phrasesArray.push(phraseObj);
   }
 }
-
-interface IProps {
-  word: string;
-  phrasesArray: Record<string, string>[];
-  highlightColor: string;
-  textColor: string;
-  wordIndex: number;
-  priority: number;
-  startOffset: number;
-  endOffset: number;
-}
-
-export default HighlightedTextObject;

@@ -3,6 +3,16 @@ import React from 'react';
 
 import BasicWhitespaceBlock from '../BasicWhitespaceBlock';
 
+interface IProps {
+  index: number;
+  word: string;
+  highlightColor: string;
+  textColor: string;
+  endOffset: number;
+  nextIndex: number;
+  deferWhitespace: any;
+}
+
 // This method decides whether we want to return a whitespace block of the same highlight color as the current word or,
 // we use the highlight color of a "parent phrase" (which is why we have deferWhitespace) or,
 // we return a default whitespace with no highlight.
@@ -44,15 +54,5 @@ const createBasicWhitespaceBlocks = ({
     </>
   );
 };
-
-interface IProps {
-  index: number;
-  word: string;
-  highlightColor: string;
-  textColor: string;
-  endOffset: number;
-  nextIndex: number;
-  deferWhitespace: any;
-}
 
 export default createBasicWhitespaceBlocks;

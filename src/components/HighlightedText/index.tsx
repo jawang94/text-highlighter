@@ -6,8 +6,21 @@ import parsePhrases from './utils/parsePhrases';
 
 import type HighlightedTextObject from './HighlightedTextObject';
 
-function HighlightedText({ text, highlights }: IProps): JSX.Element {
-  const [state, updateState] = useState<IState>({
+export interface HighlightedTextProps {
+  text: string;
+  highlights: { startOffset: number; endOffset: number; color: string; priority: number }[];
+}
+
+interface HighlightedTextState {
+  orderedHighlights: Record<string, string | number>[];
+  highlightsMap: Map<number, HighlightedTextObject>;
+  highlightedPhrasesArray: any[];
+  result: string | any[];
+  regexMatchSymbols: RegExp;
+}
+
+function HighlightedText({ text, highlights }: HighlightedTextProps): JSX.Element {
+  const [state, updateState] = useState<HighlightedTextState>({
     orderedHighlights: [],
     highlightsMap: new Map(),
     highlightedPhrasesArray: [],
@@ -20,7 +33,7 @@ function HighlightedText({ text, highlights }: IProps): JSX.Element {
     const highlightsMap = parsePhrases(text, orderedHighlights);
     const highlightedPhrasesArray = highlightPhrases(text, highlightsMap);
 
-    updateState((currentState: IState) => {
+    updateState((currentState: HighlightedTextState) => {
       return {
         ...currentState,
         orderedHighlights,
@@ -35,16 +48,3 @@ function HighlightedText({ text, highlights }: IProps): JSX.Element {
 }
 
 export default HighlightedText;
-
-export interface IProps {
-  text: string;
-  highlights: { startOffset: number; endOffset: number; color: string; priority: number }[];
-}
-
-interface IState {
-  orderedHighlights: Record<string, string | number>[];
-  highlightsMap: Map<number, HighlightedTextObject>;
-  highlightedPhrasesArray: any[];
-  result: string | any[];
-  regexMatchSymbols: RegExp;
-}

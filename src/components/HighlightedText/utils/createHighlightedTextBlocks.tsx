@@ -1,9 +1,19 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 
 import HighlightedTextBlock from '../HighlightedTextBlock';
 import createBasicWhitespaceBlocks from './createBasicWhitespaceBlocks';
 import deferWhitespaceCreation from './deferWhitespaceCreation';
+
+interface IProps {
+  index: number;
+  word: string;
+  highlightColor: string;
+  textColor: string;
+  startOffset: number;
+  endOffset: number;
+  remainingHighlights: any[];
+  highlightedPhrasesArray: any[];
+}
 
 // This method searches for the index of our highlight object word-by-word, and creates the appropriate DOM Elements if found.
 // The maximum amount of iterations is log(n) where n is the number of words in the text.
@@ -61,16 +71,5 @@ const createHighlightedTextBlocks = ({
 
   return textBlockArray;
 };
-
-interface IProps {
-  index: number;
-  word: string;
-  highlightColor: string;
-  textColor: string;
-  startOffset: number;
-  endOffset: number;
-  remainingHighlights: any[];
-  highlightedPhrasesArray: any[];
-}
 
 export default createHighlightedTextBlocks;

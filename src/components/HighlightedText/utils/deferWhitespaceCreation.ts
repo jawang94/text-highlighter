@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-
 /*
 This method checks if another highlight had started before the current highlight and continues after it.
 If so, and the current highlight is over at the conclusion of the current word, we can safely assume that the

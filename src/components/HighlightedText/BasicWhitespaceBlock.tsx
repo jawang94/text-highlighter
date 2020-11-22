@@ -6,13 +6,13 @@ const StyledSpan = styled.span`
   background-color: ${(props) => props.theme.highlightColor};
 `;
 
-interface IProps {
+interface BasicWhitespaceBlockProps {
   state: { highlightColor: string; textColor: string; key: number | string };
 }
 
 export default function BasicWhitespaceBlock({
   state: { highlightColor, textColor, key },
-}: IProps): JSX.Element {
+}: BasicWhitespaceBlockProps): JSX.Element {
   return (
     <StyledSpan
       data-myid={key}
