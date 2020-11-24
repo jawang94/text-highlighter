@@ -19,8 +19,8 @@ interface IProps {
 // The maximum amount of iterations is log(n) where n is the number of words in the text.
 // This is much much more effective than if we were to iterate character-by-character.
 // We can achieve this by simply incrementing the index by our current word length.
+// Because we handle whitespaces alongside each word and buffer that when we increment our index, we don't even need to iterate whitespaces separately.
 // * Example: A 73 character string might only contain 10 words. We save 63 iterations!
-// ! Note that whitespaces are considered as words here.
 const createHighlightedTextBlocks = ({
   index,
   word,
@@ -34,7 +34,6 @@ const createHighlightedTextBlocks = ({
   // We slice the highlightedPhrasesArray to prevent mutating the original.
   const textBlockArray = highlightedPhrasesArray.slice();
   let currentIndex = 0;
-
   for (let i = 0; i < textBlockArray.length; i += 1) {
     const currentWord = textBlockArray[i];
     // We require the +1 on currentWord.length to account for whitespaces following each word.
