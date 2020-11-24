@@ -25,9 +25,14 @@ const createBasicWhitespaceBlocks = ({
   nextIndex,
   deferWhitespace,
 }: IProps): JSX.Element => {
+  // If the nextIndex is still within boundaries of the current phrase, we can assume the following whitespace is the same color.
+  // Else if, outside of boundary, check if the following whitespace inherits color from a previously running "wrapper phrase".
+  // Else, we can assume that the whitespace should be set to default.
+  // ! Realized in my submission, I had a potential bug where I operated nextIndex <= endOffset + 1 to account for whitespace buffer. First ternary should never be allowed to go past endOffset.
+  // ! Instead, we minus the whitespace buffer we added to nextIndex and keep endOffset fixed. This will tell us if the next whitespace is within boundary of the current phrase.
   return (
     <>
-      {nextIndex <= endOffset + 1 ? (
+      {nextIndex - 1 <= endOffset ? (
         <BasicWhitespaceBlock
           key={`${index}-${word}-'space'-${highlightColor}`}
           state={{ highlightColor, textColor, key: index }}

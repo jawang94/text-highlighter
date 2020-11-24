@@ -37,7 +37,8 @@ const createHighlightedTextBlocks = ({
 
   for (let i = 0; i < textBlockArray.length; i += 1) {
     const currentWord = textBlockArray[i];
-    const incrementIndexBy = currentWord.length > 1 ? currentWord.length + 1 : currentWord.length;
+    // We require the +1 on currentWord.length to account for whitespaces following each word.
+    const incrementIndexBy = currentWord.length > 1 ? currentWord.length + 1 : 0;
     const nextIndex = currentIndex + incrementIndexBy;
     const deferWhitespace = deferWhitespaceCreation(startOffset, endOffset, remainingHighlights);
     const createWhitespaceProps = {
@@ -69,6 +70,7 @@ const createHighlightedTextBlocks = ({
     currentIndex = nextIndex;
   }
 
+  // Essentially we are updating the textBlockArray one word at a time, returning the most up to date version on each loop
   return textBlockArray;
 };
 
